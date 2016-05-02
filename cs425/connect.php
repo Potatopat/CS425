@@ -147,6 +147,74 @@ class connect
 		echo json_encode($r);
 	}
 	
+	function queryAny($str) {
+		$str = mysqli_real_escape_string($this->con, $str);
+		$result = mysqli_query($this->con,$str);
+		
+		$this->table = $table;
+		$this->result = $result;
+	}
+	
+	function selectAny($flds, $from, $wheref, $wheree) {
+		$flds = mysqli_real_escape_string($this->con, $flds);
+		$from = mysqli_real_escape_string($this->con, $from);
+		$wheref = mysqli_real_escape_string($this->con, $wheref);
+		$wheree = mysqli_real_escape_string($this->con, $wheree);
+		
+		$sql = "SELECT " . $flds . " FROM " . $from . " WHERE '" . $wheref . "'='" . $wheree . "'";
+		
+		$result = mysqli_query($this->con,$sql);
+		
+		$this->table = $table;
+		$this->result = $result;
+	}
+	
+	 /** Select Any w/ multiple wheres
+	 * @param string $flds what fields are being selected
+	 * @param string $from from sql parameter
+	 * @param string $where where sql parameter in the form of ('id'='1' AND 'name'='fake')
+	 */
+	function selectAnyMult($flds, $from, $where) {
+		$flds = mysqli_real_escape_string($this->con, $flds);
+		$from = mysqli_real_escape_string($this->con, $from);
+		$where = mysqli_real_escape_string($this->con, $where);
+		
+		$sql = "SELECT " . $flds . " FROM " . $from . " WHERE " . $where;
+		
+		$result = mysqli_query($this->con,$sql);
+		
+		$this->table = $table;
+		$this->result = $result;
+	}
+	
+	function updateAny($tbl, $set, $wheref, $wheree) {
+		$tbl = mysqli_real_escape_string($this->con, $tbl);
+		$from = mysqli_real_escape_string($this->con, $from);
+		$wheref = mysqli_real_escape_string($this->con, $wheref);
+		$wheree = mysqli_real_escape_string($this->con, $wheree);
+		
+		$sql = "UPDATE " . $tbl . " SET " . $set . " WHERE '" . $wheref . "'='" . $wheree . "'";
+		
+		$result = mysqli_query($this->con,$sql);
+		$this->result = $result;
+	}
+	
+	 /** Update any w/ multiple wheres
+	 * @param string $tbl table name
+	 * @param string $set value to be set
+	 * @param string $where the where sql parameter in the form of ('id'='1' AND 'name'='fake')
+	 */
+	function updateAnyMult($tbl, $set, $where) {
+		$tbl = mysqli_real_escape_string($this->con, $tbl);
+		$from = mysqli_real_escape_string($this->con, $from);
+		$where = mysqli_real_escape_string($this->con, $where);
+		
+		$sql = "UPDATE " . $tbl . " SET " . $set . " WHERE " . $where;
+		
+		$result = mysqli_query($this->con,$sql);
+		$this->result = $result;
+	}
+	
 	function close()
 	{
 		mysqli_close($this->con);
