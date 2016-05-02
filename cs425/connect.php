@@ -1,11 +1,5 @@
 <?php
 
-/*
- * 	
- * 	
- * 	
- */
- 
 class connect
 {
 	function __construct($host, $user, $pass, $db)
@@ -123,6 +117,17 @@ class connect
 		}
 	}
 	
+	function nonJson() {
+		self::selectTable($this->table);
+		self::getFullTable();
+		
+		$r = new stdClass;
+		$r->success = true;
+		$r->table = $this->arr;
+		
+		return $r;
+	}
+	
 	function json()
 	{
 		self::selectTable($this->table);
@@ -132,7 +137,7 @@ class connect
 		$r->success = true;
 		$r->table = $this->arr;
 		
-		echo json_encode($r);
+		return json_encode($r);
 	}
 	
 	function jsonSelect($id)
@@ -153,6 +158,8 @@ class connect
 		
 		$this->table = $table;
 		$this->result = $result;
+		
+		return $result;
 	}
 	
 	function selectAny($flds, $from, $wheref, $wheree) {
@@ -167,6 +174,8 @@ class connect
 		
 		$this->table = $table;
 		$this->result = $result;
+		
+		return $result;
 	}
 	
 	 /** Select Any w/ multiple wheres
@@ -183,8 +192,10 @@ class connect
 		
 		$result = mysqli_query($this->con,$sql);
 		
-		$this->table = $table;
+		$this->table = $from;
 		$this->result = $result;
+		
+		return $result;
 	}
 	
 	function updateAny($tbl, $set, $wheref, $wheree) {
@@ -197,6 +208,8 @@ class connect
 		
 		$result = mysqli_query($this->con,$sql);
 		$this->result = $result;
+		
+		return $result;
 	}
 	
 	 /** Update any w/ multiple wheres
@@ -213,6 +226,8 @@ class connect
 		
 		$result = mysqli_query($this->con,$sql);
 		$this->result = $result;
+		
+		return $result;
 	}
 	
 	function close()
@@ -221,9 +236,7 @@ class connect
 	}
 }
 
-$dataBase = new connect('localhost', 'root', 'password', 'cs425');
-$dataBase->selectTable('test');
-$dataBase->json();
+
 
 /*if ($_GET["key"] == "123")
 {
@@ -252,7 +265,7 @@ $dataBase->json();
 else echo "Incorrect Key";
 */
 
-$dataBase->close();
+
 
 //a 32 character code that matches
 //32 hardcoded matching characters

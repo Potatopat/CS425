@@ -1,10 +1,10 @@
 <?php
 	//phpinfo();
-	include 'connect.php';
+	include 'header.php';
 ?>
 
-<html>
-	<body>
 		Hello World!
-	</body>
-</html>
+
+<?php
+	include 'footer.php';
+?>
