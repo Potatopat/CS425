@@ -10,17 +10,17 @@ class connect
 {
 	function __construct($host, $user, $pass, $db)
 	{
-		$con = oci_connect($host, $user, $pass);
+		$con = mysqli_connect($host, $user, $pass, $db);
 		if (!$con)
 		{
-			die('Could not connect: ' . oci_error($con));
+			die('Could not connect: ' . mysqli_error($con));
 		}
 			
-		//mysqli_select_db($con, $db);
+		mysqli_select_db($con, $db);
 		
 		$this->con = $con;
 		
-		printf($con);
+		//printf($con);
 	}
 	
 	function selectTable($table)
@@ -132,7 +132,7 @@ class connect
 		
 		$r = new stdClass;
 		$r->success = true;
-		$r->orders = $this->arr;
+		$r->table = $this->arr;
 		
 		echo json_encode($r);
 	}
@@ -155,10 +155,11 @@ class connect
 	}
 }
 
-$dataBase = new connect('localhost', 'pbartman', 'cs425', 'cs425');
-/*$dataBase->selectTable('orders');
+$dataBase = new connect('localhost', 'root', 'password', 'cs425');
+$dataBase->selectTable('test');
+$dataBase->json();
 
-if ($_GET["key"] == "123")
+/*if ($_GET["key"] == "123")
 {
 	if ($_GET["action"] == "list_orders")
 	{
@@ -183,9 +184,9 @@ if ($_GET["key"] == "123")
 	}
 }
 else echo "Incorrect Key";
+*/
 
-
-$dataBase->close();*/
+$dataBase->close();
 
 //a 32 character code that matches
 //32 hardcoded matching characters
