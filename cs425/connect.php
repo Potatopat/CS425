@@ -19,8 +19,6 @@ class connect
 		mysqli_select_db($con, $db);
 		
 		$this->con = $con;
-		
-		//printf($con);
 	}
 	
 	function selectTable($table)
