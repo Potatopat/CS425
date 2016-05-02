@@ -1,5 +1,6 @@
 <?php
-	include 'connect.php';
+	phpinfo();
+	//include 'connect.php';
 ?>
 
 <html>
