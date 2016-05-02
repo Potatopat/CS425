@@ -18,7 +18,7 @@
 		?>
 		<div id="head">
 			<ul style="position: inline-block;">
-				<li><a href="/">Home</a></li>
+				<li><a href="/cs425/cs425">Home</a></li>
 				<li><a href=""></a></li>
 			</ul>
 			
