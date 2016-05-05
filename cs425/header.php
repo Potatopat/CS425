@@ -63,7 +63,7 @@
 						if(isset($_GET['user'])) {
 							echo ("/cs425/cs425/tables.php/?user=$user");
 						}
-						else echo "/cs425/cs425/tables.php";
+						else echo "/cs425/cs425/tables.php/?user=1";
 					?>
 				">View All Tables</a></li>
 				<li><a href="
@@ -71,9 +71,33 @@
 						if(isset($_GET['user'])) {
 							echo ("/cs425/cs425/profile.php/?user=$user");
 						}
-						else echo "/cs425/cs425/profile.php";
+						else echo "/cs425/cs425/profile.php/?user=1";
 					?>
 				">Profile</a></li>
+				<li><a href="
+					<?php 
+						if(isset($_GET['user'])) {
+							echo ("/cs425/cs425/ig.php/?user=$user");
+						}
+						else echo "/cs425/cs425/ig.php/?user=1";
+					?>
+				">Join Interest Groups</a></li>
+				<li><a href="
+					<?php 
+						if(isset($_GET['user'])) {
+							echo ("/cs425/cs425/assignTA.php/?user=$user");
+						}
+						else echo "/cs425/cs425/assignTA.php/?user=1";
+					?>
+				">Assign a TA</a></li>
+				<li><a href="
+					<?php 
+						if(isset($_GET['user'])) {
+							echo ("/cs425/cs425/forum.php/?user=$user");
+						}
+						else echo "/cs425/cs425/forum.php/?user=1";
+					?>
+				">Forum</a></li>
 			</ul>
 			
 		</div>

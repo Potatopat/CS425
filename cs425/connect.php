@@ -117,6 +117,10 @@ class connect
 		}
 	}
 	
+	function getCon() {
+		return $this->con;
+	}
+	
 	function getResults() {
 		return $this->result;
 		$fields = mysqli_fetch_fields($this->result);
@@ -178,6 +182,10 @@ class connect
 		$result = mysqli_query($this->con,$str);
 		
 		$this->result = $result;
+		
+		if($result === FALSE) {
+			die (mysqli_error($this->con));
+		}
 		
 		return $result;
 	}
