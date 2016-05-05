@@ -117,6 +117,27 @@ class connect
 		}
 	}
 	
+	function getResults() {
+		return $this->result;
+		$fields = mysqli_fetch_fields($this->result);
+		$arr = array(array());
+		$i = 0;
+		while($row = mysqli_fetch_object($this->result))
+		{
+			$arr[$i] = $row;
+			$i++;
+		}
+		
+		$this->fields = $fields;
+		$this->arr = $arr;
+		
+		$r = new stdClass;
+		$r->success = true;
+		$r->table = $this->arr;
+		
+		return $r;
+	}
+	
 	function nonJson() {
 		self::selectTable($this->table);
 		self::getFullTable();
@@ -156,10 +177,16 @@ class connect
 		$str = mysqli_real_escape_string($this->con, $str);
 		$result = mysqli_query($this->con,$str);
 		
-		$this->table = $table;
 		$this->result = $result;
 		
 		return $result;
+	}
+	
+	function resultArray() {
+		for ($i = 0; $arr[$i] = mysqli_fetch_assoc($this->result); $i++);
+		array_pop($arr);
+		
+		return $arr;
 	}
 	
 	function selectAny($flds, $from, $wheref, $wheree) {
@@ -172,7 +199,7 @@ class connect
 		
 		$result = mysqli_query($this->con,$sql);
 		
-		$this->table = $table;
+		$this->table = $from;
 		$this->result = $result;
 		
 		return $result;
@@ -192,8 +219,16 @@ class connect
 		
 		$result = mysqli_query($this->con,$sql);
 		
+		if($result === FALSE) {
+			die (mysqli_error($this->con));
+		}
+		
 		$this->table = $from;
 		$this->result = $result;
+		
+		/*while ($row = mysqli_fetch_array($result, MYSQL_NUM)) {
+		    printf("ID: %s  Name: %s", $row[0], $row[1]);  
+		}*/
 		
 		return $result;
 	}
